@@ -1,9 +1,9 @@
 class Checkout
 
-    attr_accessor :total,:promotions,:scanned,:items_in_store
+    attr_accessor :bill,:promotions,:scanned,:items_in_store
 
     def initialize(attr={})
-        @total=0
+        @bill=0
         @promotions=attr[:promos]
         @scanned = []
         @items_in_store=[
@@ -28,21 +28,34 @@ class Checkout
 
 
     def total
-        total=0
+        subbill=0
+        subbill1=0
         if @promotions[:promo1] == false && @promotions[:promo2] == false
-         @scanned.each do |i|
-            total+=i[:price]
-         end
-         p total
+         
+            @scanned.each do |i|
+                @bill+=i[:price]
+            end
+
         elsif @promotions[:promo1] == true && @promotions[:promo2] == false
-          @scanned.forEach do
-         end
-        elsif @promotions[:promo1] == false && @promotions[:promo2] == true
-          @scanned.forEach do     
-          end
+            @scanned.each do |i|
+                subbill+=i[:price]
+            end
+            subbill > 60 ? @bill=subbill*0.9 : @bill=subbill
+        elsif @promotions[:promo1] == false && @promotions[:promo2] == true  
+            @scanned.each do |i|
+                subbill+=i[:price]      
+            end
+            number_ties = @scanned.count(@items_in_store[0])
+            number_ties > 1 ? @bill=subbill-0.75*number_ties : @bill=subbill
+    
         else 
-          @scanned.forEach do 
-          end
+            @scanned.each do |i|
+                subbill1+=i[:price]      
+            end
+            number_ties = @scanned.count(@items_in_store[0])
+            number_ties > 1 ? subbill2=subbill1-0.75*number_ties : subbill2=subbill1
+            subbill2 > 60 ? @bill=subbill2*0.9 : @bill=subbill2
+
         end
     end
 
