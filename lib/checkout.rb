@@ -54,7 +54,7 @@ class Checkout
             end
             number_ties = @scanned.count(@items_in_store[0])
             number_ties > 1 ? subbill2=subbill1-0.75*number_ties : subbill2=subbill1
-            subbill2 > 60 ? @bill=(subbill2*0.9.round(2)) : @bill=subbill2.round(2)
+            subbill2 > 60 ? @bill=(subbill2*0.9).round(2) : @bill=subbill2.round(2)
         end
     end
 
