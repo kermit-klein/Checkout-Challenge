@@ -8,9 +8,9 @@ describe Checkout do
         expect(subject.scan(item)).not_to be_empty
     end
 
-    it "Calculates a item without promo" do
+    # it "Calculates a item without promo" do
         
-    end
+    # end
 
 
     # it "Calculates 001,002,003 basket amount" do

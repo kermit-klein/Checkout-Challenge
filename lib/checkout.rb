@@ -40,13 +40,13 @@ class Checkout
             @scanned.each do |i|
                 subbill+=i[:price]
             end
-            subbill > 60 ? @bill=subbill*0.9 : @bill=subbill
+            subbill > 60 ? @bill=(subbill*0.9).round(2) : @bill=subbill.round(2)
         elsif @promotions[:promo1] == false && @promotions[:promo2] == true  
             @scanned.each do |i|
                 subbill+=i[:price]      
             end
             number_ties = @scanned.count(@items_in_store[0])
-            number_ties > 1 ? @bill=subbill-0.75*number_ties : @bill=subbill
+            number_ties > 1 ? @bill=(subbill-0.75*number_ties).round(2) : @bill=subbill.round(2)
     
         else 
             @scanned.each do |i|
@@ -54,8 +54,7 @@ class Checkout
             end
             number_ties = @scanned.count(@items_in_store[0])
             number_ties > 1 ? subbill2=subbill1-0.75*number_ties : subbill2=subbill1
-            subbill2 > 60 ? @bill=subbill2*0.9 : @bill=subbill2
-
+            subbill2 > 60 ? @bill=(subbill2*0.9.round(2)) : @bill=subbill2.round(2)
         end
     end
 
